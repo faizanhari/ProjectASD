@@ -29,6 +29,7 @@ struct Akun{ //kumpulan variable yang akan dipanggil saat didalam code
     int jumlahoutcome;
     int sumincome;
     int sumoutcome;
+    bool penjumlahan = false;
     
 
 
@@ -142,8 +143,12 @@ class akunManager{// membuka class
 					if (usernameLoggin == akun[i].username && passwordLoggin == akun[i].password){ // if case dengan variable yang  array dengan looping untuk ngecek berulang setiap kemungkinan
 						loginSuccess = true;
                         cout << "============================================" << endl;
+
+                        if(!akun[i].penjumlahan)
                         for(int j = 1 ; j < max_data ; j++){
                             akun[i].uang = call[i][j].income + akun[i].uang;
+                                                   
+                        };akun[i].penjumlahan = true; 
                             
                         };
                         
@@ -152,7 +157,7 @@ class akunManager{// membuka class
                         
 						cout << "Money Manager" << endl;
 						cout << "selamat datang  " << akun[1].namaLengkap << endl;
-                        cout << "nominal uang anda : RP " << akun[i].uang << endl;
+                        cout << "nominal uang anda : $ " << akun[i].uang << endl;
 						case1:// untuk dapat kembali ke line ini menggunakan goto
 						cout << "==================== MENU ========================" << endl;
 						cout << "1. beranda " << endl;
@@ -281,6 +286,7 @@ int main() {
     int pilih;
     string confirm;
     akunManager akunManager;
+    bool accessed = false
     
     do {
     	cout << "==========================================================" << endl;
@@ -290,7 +296,11 @@ int main() {
         cout << "4. Keluar" << endl;
         cout << "Pilih menu 1/2/3/4: ";
         cin >> pilih;
-        akunManager.inputakun();
+
+        if(!accessed){
+                akunManager.inputakun();
+                accessed = true;
+            }
 
         switch (pilih) {
             case 1:
