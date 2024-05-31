@@ -1,0 +1,252 @@
+#include <iostream>
+using namespace std;
+
+/* (Programnya itu ntah kalian buat menu siam sederhana atau menu krs dll sebebas kalian yang penting mengimplementasikan mulai dari bab awal�sampai�akhir)
+SELEKSI KONDISI (IF ELSE)
+PERULANGAN (FOR LOOP, WHILE LOOP, DO WHILE LOOP, MODIFIKASI\
+ARRAY
+METHOD FUNGSI (void, return, reskrusif)
+
+membuat program apa?
+gapura
+LOGIN
+
+*/
+
+#include <iostream>
+#include <limits>
+using namespace std;
+
+const int max_account = 10;
+const int max_data = 100;
+struct Akun{ //kumpulan variable yang akan dipanggil saat didalam code
+	string username;
+	string password;
+	string namaLengkap;
+    bool isLogged;
+    int uang;
+
+
+	long long int nim; //long digunakan dua kali agar dapat mengandung variable lebih banyak
+	struct Akun *next;
+};
+
+struct Call{
+    int income;
+    int outcome;
+    char date;
+
+};
+
+class akunManager{// membuka class
+	
+	
+	private :
+        Call call [max_account][max_data];
+		Akun akun [max_account]; //penggunaan array untuk di panggil dalma variable yang digunakan
+        //Akun input[max_account][100];
+		int jumlahAkun;
+		
+	public :
+		akunManager () : jumlahAkun(1) {}
+	//fungsi void digunakan
+    void inputakun(){
+
+        //akun 1
+        akun[1].username = "faiz@gmail.com";
+        akun[1].password = "faizanhari";
+        akun[1].uang = 0;
+        call[1][1].income = 50000;
+        call[1][2].income = 25000;
+        call[1][3].income = 100000;
+        call[1][4].income = 250000;
+        call[1][5].income = 7000;
+        call[1][6].income = 43000;
+        call[1][7].income = 54000;
+        call[1][8].income = 240000;
+
+
+        akun[2].username = "dzaki@gmail.com";
+        akun[2].password = "dzakifadhlurrohman";
+        call[2][1].income = 50000;
+        call[2][2].income = 23000;
+        call[2][3].income = 13400;
+        call[2][4].income = 45000;
+        call[2][5].income = 64300;
+        call[2][6].income = 44000;
+        call[2][7].income = 344000;
+        call[2][8].income = 20300;
+
+
+    }
+	void registerAkun(){ //nama lengkap, NIM, uang
+
+			if (jumlahAkun < max_account){
+				cout <<"=============================================" << endl;
+				cout << "masukan gmail : ";
+				getline (cin >> ws, akun[jumlahAkun].username);
+				cout << "masukan password (no digits): ";
+				cin >> akun[jumlahAkun].password;
+				cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+				cout << "registrasi akun berhasil" << endl;
+				cout << "=================================================================" << endl;
+				akun[jumlahAkun].isLogged = false;
+				cout << "lengkapi data anda " << endl;
+				cout << "Nama : ";
+				getline(cin, akun[jumlahAkun].namaLengkap); // getline (cin >> ws, variable) cin.getline (variable, limit)
+				jumlahAkun++	;
+			}else {
+				cout << "sudah limit" << endl;
+			}
+		}
+		
+	void logginAkun(){
+		cout << "============================================" << endl;
+			string logoutconfirm;
+			string usernameLoggin;
+			string passwordLoggin;
+			cout << "gmail : ";
+			cin >> usernameLoggin;
+			cout << "password : ";
+			cin >> passwordLoggin;
+			bool loginSuccess = false;
+			
+			for (int i = 1; i < max_account; i++){ // for loop
+				int menu;		
+					if (usernameLoggin == akun[i].username && passwordLoggin == akun[i].password){ // if case dengan variable yang  array dengan looping untuk ngecek berulang setiap kemungkinan
+						loginSuccess = true;
+
+                        for(int j = 1 ; i < max_data ; j++){
+                            akun[i].uang = call[i][j].income;
+                        };
+
+
+
+						cout << "Money Manager" << endl;
+						cout << "                   " << endl;
+						case1:// untuk dapat kembali ke line ini menggunakan goto
+						cout << "==================== MENU ========================" << endl;
+						cout << "1. beranda " << endl;
+						cout << "2. menu " << endl;
+						cout << "3. profile " << endl;
+						cout << "4. keluar" << endl;
+						cout << "pilih menu : ";
+						
+						cin >> menu;
+						cout << endl;
+						
+						switch (menu){ // switch case
+							case 1 : 
+							cout <<  "================================================";
+								cout << "halo, " << akun[i].namaLengkap << endl;
+								cout << " " ; //tolong isi semacam paragraph yang berisi kurang lebih seperti "selamat datang di aplikasi ini, aplikasi ini memiliki
+								goto case1;
+							case 2 :
+								case2:
+								cout << endl;
+								cout <<"pilih menu" << endl;
+								cout <<"1.        " << endl;
+								cout <<"2.        " << endl;
+								cout <<"3.        "<< endl;
+								cout <<"4.balik" << endl;
+								cout << "pilih 1/2/3/4 : ";
+								int choose;
+								cin >> choose;
+								cout << endl;
+								switch (choose){				
+									case 1 :
+										cout << "==========================================" << endl;
+										
+										cout << "==========================================" << endl;
+										goto case2;
+									case 2 : 
+									
+										cout << "==========================================" << endl;
+									
+										
+										cout << "==========================================" << endl;
+											goto case2;				
+									case 3 : 
+                    cout << "==========================================" << endl;
+									
+										
+										cout << "==========================================" << endl;
+        
+										
+										goto case2;	
+									case 4 :
+										goto case1;																									
+									} 	
+								
+							case 3 :
+										cout << "profil  saya" << endl;
+										cout << akun[i].username << endl;
+										cout << "nama                      : ";
+										cout << akun[i].namaLengkap<< endl;
+                                        cout << "nominal uang              : " << akun[i].uang << endl; 
+									  
+										cout <<"=================================================================";
+										goto case1;																	
+							}
+										return;
+										break;
+						} else {
+								
+						}
+				} if (!loginSuccess){
+					cout << endl;
+					cout << "salah" << endl;
+					cout << endl;
+				} 
+	
+		}
+	void dataTersimpan(){
+			
+				
+			for(int  i  = 1; i < max_account; i++){				
+				cout << "akun ke " << i << endl;
+				cout << "username : " << akun[i].username<< endl;
+				cout << "password : " << akun[i].password << endl;				
+				}
+			}
+		
+		
+};
+
+int main() {
+    int pilih;
+    string confirm;
+    akunManager akunManager;
+    
+    do {
+    	cout << "==========================================================" << endl;
+        cout << "1. Registrasi Akun" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. data akun" << endl;
+        cout << "4. Keluar" << endl;
+        cout << "Pilih menu 1/2/3/4: ";
+        cin >> pilih;
+        akunManager.inputakun();
+
+        switch (pilih) {
+            case 1:
+                akunManager.registerAkun();
+                break;
+            case 2:
+                akunManager.logginAkun();
+                break;
+            case 3:
+            	akunManager.dataTersimpan();
+            	break;
+            case 4:
+                cout << "Terima Kasih" << endl;
+                break;
+          
+          
+        }
+    } while (pilih != 4);	
+	
+	    return 0;
+};
+
+/*
