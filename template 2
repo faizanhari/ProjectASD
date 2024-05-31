@@ -27,6 +27,9 @@ struct Akun{ //kumpulan variable yang akan dipanggil saat didalam code
     int uang;
     int jumlahincome;
     int jumlahoutcome;
+    int sumincome;
+    int sumoutcome;
+    
 
 
 	long long int nim; //long digunakan dua kali agar dapat mengandung variable lebih banyak
@@ -70,22 +73,17 @@ class akunManager{// membuka class
         call[1][6].income = 43000;
         call[1][7].income = 54000;
         call[1][8].income = 240000;
-
-		call[1][1].outcome = 16000;
-		call[1][2].outcome = 12000;
-		call[1][3].outcome = 9000;
-		call[1][3].outcome = 36000;
-		call[1][4].outcome = 24000;
-		call[1][5].outcome = 12000;
-		call[1][6].outcome = 20000;
-		call[1][7].outcome = 48000;
-		call[1][8].outcome = 83000;
-
         akun[1].jumlahincome = 8;
-		akun[1].jumlahoutcome = 0;
-
-		
-	
+        call[1][1].outcome = 302;
+        call[1][2].outcome = 200;
+        call[1][3].outcome = 33333;
+        call[1][4].outcome = 3049;
+        call[1][5].outcome = 8690;
+        call[1][6].outcome = 99940;
+        call[1][7].outcome = 484;
+        call[1][8].outcome = 3000;
+        akun[1].jumlahoutcome = 8;
+        
 
 
 
@@ -101,9 +99,8 @@ class akunManager{// membuka class
         call[2][6].income = 44000;
         call[2][7].income = 344000;
         call[2][8].income = 20300;
+        akun[1].jumlahincome = 8;
         
-		akun[2].jumlahincome = 8;
-		akun[2].jumlahoutcome = 0;
 
 
     }
@@ -146,7 +143,8 @@ class akunManager{// membuka class
 						loginSuccess = true;
                         cout << "============================================" << endl;
                         for(int j = 1 ; j < max_data ; j++){
-                            akun[i].uang = call[i][j].jumla + akun[i].uang;
+                            akun[i].uang = call[i][j].income + akun[i].uang;
+                            
                         };
                         
 
@@ -176,8 +174,8 @@ class akunManager{// membuka class
 								case2:
 								cout << endl;
 								cout <<"pilih menu" << endl;
-								cout <<"1. Input pengeluaran " << endl;
-								cout <<"2.        " << endl;
+								cout <<"1.pengeluaran" << endl;
+								cout <<"2.pemasukan" << endl;
 								cout <<"3.history"<< endl;
 								cout <<"4.balik" << endl;
 								cout << "pilih 1/2/3/4 : ";
@@ -185,59 +183,73 @@ class akunManager{// membuka class
 								cin >> choose;
 								cout << endl;
 								switch (choose){				
+									switch (choose){				
 									case 1 :
 										cout << "==========================================" << endl;
-										if (akun[i].jumlahoutcome + 1 < max_data) {
-                                            int x = akun[i].jumlahoutcome + 1;
-                                            cout << "Masukkan Nominal Pengeluaran: ";
-                                            cin >> call[i][x].outcome;
-                                            akun[i].jumlahoutcome++;
-                                            cout << "Pengeluaran berhasil ditambahkan." << endl;
-                                        } else {
-                                            cout << "Data pemasukkan sudah mencapai batas" << endl;
-                                        }
-                                        break;
-					                    
+                                						cout << "data pengeluaran : " << endl;
+                                        					for(int j = 1 ; j <= akun[i].jumlahoutcome; j++){
+                                        					cout << j << ". $" << call[i][j].outcome << endl;                                        
+                                        					}
+                                        					cout << endl;
+                                        					cout << "nominal di akun : " << akun[i].uang << endl;
+                                       						cout << endl;
+                                        					if (akun[i].jumlahoutcome + 1 < max_data) {
+                                           						int x = akun[i].jumlahoutcome + 1;
+                                            						cout << "Masukkan Nominal Pengeluaran: RP. ";
+                                            						cin >> call[i][x].outcome;
+                                            						akun[i].jumlahoutcome++;
+                                            						cout << "Pengeluaran berhasil ditambahkan." << endl;
+                                           						akun[i].sumoutcome = akun[i].sumoutcome + call[i][x].outcome;
+                                            						akun[i].uang = akun[i].uang - call[i][x].outcome;
+                                       						 } else {
+                                           						cout << "Data pemasukkan sudah mencapai batas" << endl;
+                                       						 }
+                                       						 break;
+										
 										cout << "==========================================" << endl;
 										goto case2;
 									case 2 : 
-										cout << "==========================================" << endl;
-										if (akun[i].jumlahincome + 1 < max_data) {
-                                            int x = akun[i].jumlahincome + 1;
-                                            cout << "Masukkan Nominal Pemasukan: ";
-                                            cin >> call[i][x].income;
-                                            akun[i].jumlahincome++;
-                                            cout << "Pemasukan berhasil ditambahkan sebesar" << call[i][x].income << endl;
-											cout << i << "and" << x << endl;
-                                        } 
-										else {
-                                            cout << "Data pemasukkan sudah mencapai batas" << endl;
-                                        }
-                                        break;
+                                   						cout << "==========================================" << endl;
+                                        					cout << endl;
+                                        					cout << "data pengeluaran : " << endl;
+                                        					for(int j = 1 ; j <= akun[i].jumlahincome; j++){
+                                        					cout << j << ". $" << call[i][j].income << endl;                                        
+                                        					}
+                                        					cout << endl;
+                                        					cout << "nominal di akun : " << akun[i].uang << endl;
+                                       						cout << endl;
 										
 										cout << "==========================================" << endl;
 											goto case2;				
 									case 3 : 
-                                        cout << "==========================================" << endl;
-                                        cout << "income " << endl;
-                                        for(int j = 1 ; j <= akun[i].jumlahincome ; j++){
+                                       						cout << "==========================================" << endl;
+                                        					cout << "income :  " << endl;
+                                        					for(int j = 1 ; j <= akun[i].jumlahincome ; j++){
                                             
-                                            cout << j <<". " << call[i][j].income << endl;;
-                                        };
+                                            						cout << j <<". " << call[i][j].income << endl;;
+                                        					};
+
+                                        					cout << "outcome :  " << endl;
+                                        					for(int j = 1 ; j <= akun[i].jumlahoutcome ; j++){
+                                            
+                                           						 cout << j <<". " << call[i][j].outcome << endl;;
+                                        					};
+
 										cout << "==========================================" << endl;
         
 										
 										goto case2;	
 									case 4 :
 										goto case1;																									
-									} 	
+									};
 								
 							case 3 :
 										cout << "profil  saya" << endl;
 										cout << akun[i].username << endl;
 										cout << "nama                      : ";
 										cout << akun[i].namaLengkap<< endl;
-                                        cout << "nominal uang              : " << akun[i].uang << endl; 
+                                       						cout << "nominal uang              : " << akun[i].uang << endl; 
+                                        
 									  
 										cout <<"=================================================================";
 										goto case1;																	
@@ -263,8 +275,6 @@ class akunManager{// membuka class
 				cout << "password : " << akun[i].password << endl;				
 				}
 			}
-		
-		
 };
 
 int main() {
